@@ -1,0 +1,32 @@
+<!-- subtitle-converter.component.html -->
+<div class="file-upload-container">
+    <h2>Select Subtitle Files for Conversion</h2>
+  
+    <!-- File Input Field -->
+    <div class="file-input-wrapper">
+      <input type="file" id="file" (change)="onFileSelected($event)" multiple>
+      <label for="file">Choose Files</label>
+    </div>
+  
+    <!-- Display Selected Files -->
+    <div class="file-list" *ngIf="selectedFiles.length > 0">
+      <p *ngFor="let file of selectedFiles">{{ file.name }}</p>
+    </div>
+  
+    <!-- Upload Button -->
+    <button [disabled]="selectedFiles.length === 0 || isUploading" (click)="uploadFiles()">
+      {{ isUploading ? 'Uploading...' : 'Convert and Download' }}
+    </button>
+  
+    <!-- Progress Bar -->
+    <div class="progress-bar" *ngIf="isUploading">
+      <div class="progress" [style.width.%]="uploadProgress"></div>
+      <p>{{ uploadProgress }}% Completed</p>
+    </div>
+  
+    <!-- Download Button -->
+    <div *ngIf="downloadUrl">
+      <button (click)="downloadConvertedFile()">Download Converted Files</button>
+    </div>
+  </div>
+  
